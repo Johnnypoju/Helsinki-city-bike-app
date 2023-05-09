@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize');
-const { DATABASE_URL } = require('./config');
-const {Umzug, SequelizeStorage } = require('umzug');
+import { Sequelize } from 'sequelize';
+import { Umzug, SequelizeStorage } from 'umzug';
+import { DATABASE_URL } from './config';
 
-console.log(DATABASE_URL);
 
-const sequelize = new Sequelize(DATABASE_URL, {
+
+export const sequelize = new Sequelize(DATABASE_URL, {
     dialect: 'postgres'
 });
 
@@ -44,6 +44,4 @@ const rollBackMigration = async () => {
     await migrator.down();
 }
 
-module.exports = {
-    connectToDatabase, sequelize, rollBackMigration
-};
+export { connectToDatabase, runMigrations, rollBackMigration };
