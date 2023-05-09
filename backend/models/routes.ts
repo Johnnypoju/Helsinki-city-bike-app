@@ -19,20 +19,26 @@ Route.init({
     },
     departureStationId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: 'stations', key: 'id'}
+        allowNull: false
     },
-    returnStationId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: 'stations', key: 'id'}
-    },
-    distance: {
+    departureStationName: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    duration: {
+    returnStationId: {
         type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    returnStationName: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    distance: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    duration: {
+        type: DataTypes.FLOAT,
         allowNull: false
     }
 

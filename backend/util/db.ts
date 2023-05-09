@@ -14,8 +14,9 @@ const connectToDatabase = async () => {
         console.log("Auth OK!")
         await runMigrations();
         console.log('Connected to database');
-    } catch (error) {
+    } catch (error: any) {
         console.log('Failed to connect to the database');
+        console.log(error.message);
         return process.exit(1);
     }
     return null;
@@ -23,7 +24,7 @@ const connectToDatabase = async () => {
 
 const migrationConf = {
     migrations: {
-        glob: 'migrations/*.js'
+        glob: 'migrations/*.ts'
     },
     storage: new SequelizeStorage({ sequelize, tableName: 'migrations' }),
     context: sequelize.getQueryInterface(),
