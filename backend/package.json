@@ -1,0 +1,25 @@
+{
+  "name": "helsinki-city-bike-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joonas Sumusalo",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "pg": "^8.10.0",
+    "sequelize": "^6.31.1",
+    "umzug": "^3.2.1"
+  }
+}
