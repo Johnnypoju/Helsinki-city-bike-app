@@ -1,5 +1,6 @@
 import { Station, Route } from '../models';
 import express from 'express';
+import { sequelize } from '../util/db';
 
 const router = express.Router();
 
@@ -10,12 +11,12 @@ router.get('/', async (req,res, next) => {
         const startIndex = (page - 1) * limit;
         const offset = page * limit;
         try {
-            const routes = await Station.findAll({
+            const stations = await Station.findAll({
                 limit,
                 offset,
                 attributes: ['id','station_name_fi', 'address_fi'],
             });
-            return res.json(routes);
+            return res.json(stations);
         } catch (error : any) {
             next(error.message);
         }
@@ -23,12 +24,34 @@ router.get('/', async (req,res, next) => {
     else {
         try {
 
-            const routes = await Station.findAll();
-            return res.json(routes);
+            const stations = await Station.findAll();
+            return res.json(stations);
         } catch (error : any) {
             next(error)
         }    
     }
 });
+
+router.get('/:id', async (req, res, next) => {
+    console.log(req.params.id);
+    const station = await Station.findByPk(req.params.id);
+    const stationId = station?.dataValues.id;
+    if (station) {
+        const departureStations = await Route.count({
+            where: {
+                departureStationId: stationId
+            }
+        })
+        const returStations = await Route.count({
+            where: {
+                returnStationId: stationId
+            }
+        })
+        const stationResponse = { ...station.dataValues, departures: departureStations, returns: returStations};
+        return res.json(stationResponse);
+    }
+    
+    
+})
 
 export default router;
