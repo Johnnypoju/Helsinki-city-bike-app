@@ -6,7 +6,7 @@ import Route from '../models/routes';
 export async function up() {
         try {
             let data : Array<any> = [];
-            fs.createReadStream("./migrations/2021-05.csv")
+            fs.createReadStream("./2021-05.csv")
                 .pipe(parse({ delimiter: ",", from_line: 2}))
                 .on("data", function (row) {
                     if (row[7] < 10 || row[6] < 10) {

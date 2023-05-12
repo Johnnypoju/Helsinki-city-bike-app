@@ -4,7 +4,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-    if (req.query.page) {
+   if (req.query.page) {
         const page : any = req.query.page;
         const limit : any = req.query.limit;
         const startIndex = (page - 1) * limit;
@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
             return res.json(routes);
         } catch (error : any) {
             next(error)
-        }   
+        }    
     }
 })
 

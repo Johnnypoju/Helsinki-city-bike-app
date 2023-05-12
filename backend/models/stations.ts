@@ -9,36 +9,35 @@ Station.init({
         primaryKey: true
     },
     stationNameFi: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     stationNameSe: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     stationNameEn: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     addressFi: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     addressSe: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     cityFi: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     citySe: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     operator: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: DataTypes.STRING,
     },
     capacity: {
         type: DataTypes.INTEGER,
@@ -55,6 +54,7 @@ Station.init({
 }, {
     sequelize,
     underscored: true,
+    timestamps: false,
     modelName: 'station'
 });
 
