@@ -1,6 +1,6 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { config } from 'dotenv';
+config();
 
-export const DATABASE_URL = "postgres://postgres:devving@localhost:5432/helsinkicitybike";
+export const DATABASE_URL = process.env.DATABASE_URL as string;
 
-export const PORT = 3001;
+export const PORT = process.env.PORT as string;

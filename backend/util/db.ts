@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 import { Umzug, SequelizeStorage } from 'umzug';
 import { DATABASE_URL } from './config';
 
-
+console.log(DATABASE_URL);
 
 export const sequelize = new Sequelize(DATABASE_URL, {
     dialect: 'postgres'

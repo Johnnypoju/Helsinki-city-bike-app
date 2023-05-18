@@ -1,25 +1,12 @@
-import express from 'express';
-const app = express();
-
-import { connectToDatabase } from './util/db';
-import routesRouter from './controllers/routes';
-import stationsRouter from './controllers/stations';
-import errorHandler from './util/errorHandler';
-
+import app from "./app"
+import http from "http"
 import { PORT } from './util/config';
 
-app.use(express.json());
+import { connectToDatabase } from './util/db';
 
-app.use('/api/routes', routesRouter);
-app.use('/api/stations', stationsRouter);
+const server = http.createServer(app)
 
-app.use(errorHandler);
-
-const start = async () => {
+server.listen(PORT, async () => {
     await connectToDatabase();
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-};2
-
-start();
+	console.log(`Server running on port ${PORT}`);
+})
