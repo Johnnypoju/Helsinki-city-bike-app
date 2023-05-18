@@ -4,7 +4,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-   if (req.query.page) {
+   if (req.query.page && req.query.limit) {
         const page : any = req.query.page;
         const limit : any = req.query.limit;
         const startIndex = (page - 1) * limit;
@@ -22,9 +22,8 @@ router.get('/', async (req, res, next) => {
     }
     else {
         try {
-
-            const routes = await Route.findAll();
-            return res.json(routes);
+            const error = { message: 'page or limit parameters missing.'}
+            return res.status(400).json(error);
         } catch (error : any) {
             next(error)
         }    
