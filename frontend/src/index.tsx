@@ -1,15 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom';
 import App from './App';
+import { reducer, StateProvider } from "./state";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
+ReactDOM.render(
+  <StateProvider reducer={reducer}>
     <App />
-  </React.StrictMode>
+  </StateProvider>,
+  document.getElementById('root')
 );
 
 
