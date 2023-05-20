@@ -6,13 +6,15 @@ export type State = {
   journeys: { [id: number]: Journey };
   page: number;
   limit: number;
+  count: number;
   
 };
 
 const initialState: State = {
   journeys: {},
   page: 1,
-  limit: 20
+  limit: 20,
+  count: 0
 };
 
 export const StateContext = createContext<[State, React.Dispatch<any>]>([

@@ -1,13 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 import { reducer, StateProvider } from "./state";
+const container = document.getElementById('root');
 
-ReactDOM.render(
+const root = createRoot(container!);
+
+root.render(
   <StateProvider reducer={reducer}>
     <App />
-  </StateProvider>,
-  document.getElementById('root')
+  </StateProvider>
 );
+
 
 
