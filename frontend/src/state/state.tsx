@@ -1,20 +1,21 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { Journey } from "../types";
+import { Journey, Station } from "../types";
 
 
 export type State = {
-  journeys: { [id: number]: Journey };
+  journeys: { routes: { [id: number]: Journey }, count: number };
+  stations: { stations: { [id: number]: Station }, count: number };
   page: number;
   limit: number;
-  count: number;
   
 };
 
 const initialState: State = {
-  journeys: {},
+  journeys: { routes: {}, count: 0},
+  stations: { stations: {}, count: 0 },
   page: 1,
   limit: 20,
-  count: 0
+  
 };
 
 export const StateContext = createContext<[State, React.Dispatch<any>]>([

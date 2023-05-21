@@ -2,54 +2,62 @@ import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { Button, Divider, Container } from "@material-ui/core";
-import { Journey } from "./types";
+import { Journey, JourneyArray, Station, StationArray } from "./types";
 import JourneyList from './JourneyList';
-import { setCount, setJourneyList,  useStateValue } from "./state";
+import StationList from './StationList';
+import { setJourneyList,  setPage,  setStationList,  useStateValue } from "./state";
 import { apiBaseUrl } from './constants';
 
 
 const App = ()  => {
 
   const [{page, limit}, dispatch ] = useStateValue();
+  
 
   React.useEffect(() => {
     
     const fetchJourneyList = async () => {
       try {
-        const { data: journeyListFromApi } = await axios.get<Journey[]>(
+        const { data: journeyListFromApi } = await axios.get<JourneyArray>(
           `${apiBaseUrl}/routes?page=${page}&limit=${limit}`
         )
         
         dispatch(setJourneyList(journeyListFromApi));
-      
+        
       } catch (error) {
         console.error(error);
       }
       };
-    const fetchCount = async () => {
+  
+    const fetchStationList = async () => {
       try {
-        const { data: count } = await axios.get(
-          `${apiBaseUrl}/routes/count`
-        );
-        dispatch(setCount(count));
+        const { data: stationListFromApi } = await axios.get<StationArray>(
+          `${apiBaseUrl}/stations?page=${page}&limit=${limit}`
+        )
+        dispatch(setStationList(stationListFromApi));
+        
       } catch (error) {
         console.error(error);
       }
-    }
-      
-      void fetchJourneyList();
-      void fetchCount();
+    };
 
+    void fetchJourneyList();
+    void fetchStationList();
+    
   }, [dispatch, page, limit]);
+
+  
 
   return (
     <div className='App'>
       <Router>
         <Container>
-          <Button component={Link} to="/">Journeys</Button>
+          <Button component={Link} to="/" >Journeys</Button>
+          <Button component={Link} to="/stations" >Stations</Button>
           <Divider hidden/>
           <Routes>
             <Route path="/" element={<JourneyList />}/>
+            <Route path="/stations" element={<StationList />}/>
           </Routes>
         </Container>
       </Router>

@@ -12,13 +12,14 @@ router.get('/', async (req, res, next) => {
         offset = (page-1) * limit;
         
         try {
+            const count = await Route.count({});
             const routes = await Route.findAll({
                 where: {
                     id: { [Op.between] : [offset+1, limit+offset] }
                 },
                 attributes: ['id','departure_station_name', 'return_station_name', 'distance', 'duration'],
             });
-            return res.json(routes);
+            return res.json({ routes, count });
         } catch (error : any) {
             next(error.message);
         }

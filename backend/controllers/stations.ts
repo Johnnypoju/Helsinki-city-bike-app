@@ -1,22 +1,25 @@
 import { Station, Route } from '../models';
 import express from 'express';
+import { Op } from 'sequelize';
 import { sequelize } from '../util/db';
 
 const router = express.Router();
 
 router.get('/', async (req,res, next) => {
     if (req.query.page) {
-        const page : any = req.query.page;
-        const limit : any = req.query.limit;
-        const startIndex = (page - 1) * limit;
-        const offset = page * limit;
+        const page = Number(req.query.page);
+        const limit = Number(req.query.limit);
+        const offset : number = (page-1) * limit;
+
         try {
+            const count = await Station.count({});
             const stations = await Station.findAll({
-                limit,
-                offset,
+                where: {
+                    id: { [Op.between] : [offset+1, limit+offset] }
+                },
                 attributes: ['id','station_name_fi', 'address_fi'],
             });
-            return res.json(stations);
+            return res.json({ stations, count });
         } catch (error : any) {
             next(error.message);
         }
@@ -37,12 +40,12 @@ router.get('/:id', async (req, res, next) => {
     const station = await Station.findByPk(req.params.id);
     const stationId = station?.dataValues.id;
     if (station) {
-        const departureStations = await Route.count({
+        const departureStations = await Station.count({
             where: {
                 departureStationId: stationId
             }
         })
-        const returStations = await Route.count({
+        const returStations = await Station.count({
             where: {
                 returnStationId: stationId
             }
@@ -52,6 +55,16 @@ router.get('/:id', async (req, res, next) => {
     }
     
     
-})
+});
+
+router.get('/count', async (req, res, next) => {
+    try {
+        const count = await Station.count({});
+        return res.json(count);
+    }
+    catch (error: any) {
+        next(error.message);
+    }
+});
 
 export default router;

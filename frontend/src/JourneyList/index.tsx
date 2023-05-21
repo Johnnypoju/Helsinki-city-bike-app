@@ -3,17 +3,17 @@ import axios from 'axios';
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
 
 import { setJourneyList, setPage, useStateValue } from "../state";
-import { Journey } from "../types";
+import { Journey, JourneyArray } from "../types";
 import ReacPaginate from 'react-paginate';
 import { apiBaseUrl } from "../constants";
 
 
-const JourneyList = () => {
-    const [ { journeys, count, page, limit }, dispatch ] = useStateValue();
+const JourneyList = ( ) => {
+    const [ { journeys, page, limit }, dispatch ] = useStateValue();
 
     const paginate = async ({selected} : {selected: number}) => {
         dispatch(setPage(selected+1));
-        const { data: journeyListFromApi } = await axios.get<Journey[]>(
+        const { data: journeyListFromApi } = await axios.get<JourneyArray>(
             `${apiBaseUrl}/routes?page=${page}&limit=${limit}`
           )
         dispatch(setJourneyList(journeyListFromApi));
@@ -38,20 +38,20 @@ const JourneyList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {Object.values(journeys).map((journey: Journey) => (
-                        <TableRow key={journey.id}>
-                            <TableCell>{journey.id}</TableCell>
-                            <TableCell>{journey.departure_station_name}</TableCell>
-                            <TableCell>{journey.return_station_name}</TableCell>
-                            <TableCell>{journey.duration/60}</TableCell>
-                            <TableCell>{journey.distance/1000}</TableCell>
+                    {Object.values(journeys.routes).map((route: Journey) => (
+                        <TableRow key={route.id}>
+                            <TableCell>{route.id}</TableCell>
+                            <TableCell>{route.departure_station_name}</TableCell>
+                            <TableCell>{route.return_station_name}</TableCell>
+                            <TableCell>{route.duration/60}</TableCell>
+                            <TableCell>{route.distance/1000}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
             <ReacPaginate
                 onPageChange={paginate}
-                pageCount={Math.ceil(count / limit)}
+                pageCount={Math.ceil(journeys.count / limit)}
                 previousLabel={'Prev'}
                 nextLabel={'Next'}
                 containerClassName={'pagination'}

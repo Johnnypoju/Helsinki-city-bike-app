@@ -5,3 +5,21 @@ export interface Journey {
     distance: number,
     duration: number
 }
+
+export interface Station {
+    id: string,
+    station_name_fi: string,
+    station_address_fi: string,
+    departures: number,
+    returns: number
+}
+
+export interface JourneyArray {
+    routes: Journey[]
+    count: number
+}
+
+export interface StationArray {
+    stations: Station[]
+    count: number
+}
