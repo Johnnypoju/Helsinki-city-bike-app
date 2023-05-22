@@ -1,11 +1,10 @@
-import React from "react";
 import axios from 'axios';
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
 
-import { setJourneyList, setPage, useStateValue } from "../state";
-import { Journey, JourneyArray } from "../types";
+import { setJourneyList, setPage, useStateValue } from "../../state";
+import { Journey, JourneyArray } from "../../types";
 import ReacPaginate from 'react-paginate';
-import { apiBaseUrl } from "../constants";
+import { apiBaseUrl } from "../../constants";
 
 
 const JourneyList = ( ) => {

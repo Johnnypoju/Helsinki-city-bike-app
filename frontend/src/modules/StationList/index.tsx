@@ -2,10 +2,10 @@ import React from "react";
 import axios from 'axios';
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
 
-import { setStationList, setPage, useStateValue } from "../state";
-import { StationArray, Station } from "../types";
+import { setStationList, setPage, useStateValue } from "../../state";
+import { StationArray, Station } from "../../types";
 import ReacPaginate from 'react-paginate';
-import { apiBaseUrl } from "../constants";
+import { apiBaseUrl } from "../../constants";
 
 
 const StationList = () => {

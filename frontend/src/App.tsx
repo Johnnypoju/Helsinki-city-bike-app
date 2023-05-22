@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { Button, Divider, Container } from "@material-ui/core";
-import { Journey, JourneyArray, Station, StationArray } from "./types";
-import JourneyList from './JourneyList';
-import StationList from './StationList';
-import { setJourneyList,  setPage,  setStationList,  useStateValue } from "./state";
+import {  JourneyArray,  StationArray } from "./types";
+import JourneyList from './modules/JourneyList';
+import StationList from './modules/StationList';
+import { setJourneyList,  setStationList,  useStateValue } from "./state";
 import { apiBaseUrl } from './constants';
-
+import './index.css';
 
 const App = ()  => {
 
