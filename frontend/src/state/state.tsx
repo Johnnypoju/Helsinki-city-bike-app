@@ -5,6 +5,7 @@ import { Journey, Station } from "../types";
 export type State = {
   journeys: { routes: { [id: number]: Journey }, count: number };
   stations: { stations: { [id: number]: Station }, count: number };
+  station: Station;
   page: number;
   limit: number;
   
@@ -13,6 +14,7 @@ export type State = {
 const initialState: State = {
   journeys: { routes: {}, count: 0},
   stations: { stations: {}, count: 0 },
+  station: { id: 0, address_fi: "", station_name_fi: "", departures: 0, returns: 0},
   page: 1,
   limit: 20,
   

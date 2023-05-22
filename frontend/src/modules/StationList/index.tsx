@@ -6,10 +6,12 @@ import { setStationList, setPage, useStateValue } from "../../state";
 import { StationArray, Station } from "../../types";
 import ReacPaginate from 'react-paginate';
 import { apiBaseUrl } from "../../constants";
+import { useNavigate } from 'react-router-dom';
 
 
 const StationList = () => {
     const [ { stations, page, limit }, dispatch ] = useStateValue();
+    const navigate = useNavigate();
 
     const paginate = async ({selected} : {selected: number}) => {
         dispatch(setPage(selected+1));
@@ -38,7 +40,7 @@ const StationList = () => {
                     {Object.values(stations.stations).map((station: Station) => (
                         <TableRow key={station.id}>
                             <TableCell>{station.id}</TableCell>
-                            <TableCell>{station.station_name_fi}</TableCell>
+                            <TableCell onClick={() => navigate(`/stations/${station.id}`)}>{station.station_name_fi}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

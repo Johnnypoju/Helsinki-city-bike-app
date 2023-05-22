@@ -1,5 +1,5 @@
 import { State } from "./state";
-import { JourneyArray, StationArray } from "../types";
+import { JourneyArray, StationArray, Station } from "../types";
 
 export type Action =
     | {
@@ -9,6 +9,10 @@ export type Action =
     | {
         type: "SET_STATION_LIST";
         payload: StationArray;
+    }
+    | {
+        type: "SET_STATION";
+        payload: Station;
     }
     | {
         type: "SET_PAGE";
@@ -29,6 +33,11 @@ export const reducer = ( state: State, action: Action ): State => {
                 ...state,
                 stations: action.payload
             }
+        case "SET_STATION":
+            return {
+                ...state,
+                station: action.payload
+            }
         case "SET_PAGE":
             return {
                 ...state,
@@ -47,6 +56,13 @@ export const setJourneyList = (content: JourneyArray) => {
 export const setStationList = (content: StationArray) => {
     return {
         type: "SET_STATION_LIST",
+        payload: content
+    }
+}
+
+export const setStation = (content: Station) => {
+    return {
+        type: "SET_STATION",
         payload: content
     }
 }

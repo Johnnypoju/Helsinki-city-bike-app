@@ -5,6 +5,7 @@ import { Button, Divider, Container } from "@material-ui/core";
 import {  JourneyArray,  StationArray } from "./types";
 import JourneyList from './modules/JourneyList';
 import StationList from './modules/StationList';
+import StationView from './modules/StationView';
 import { setJourneyList,  setStationList,  useStateValue } from "./state";
 import { apiBaseUrl } from './constants';
 import './index.css';
@@ -58,6 +59,7 @@ const App = ()  => {
           <Routes>
             <Route path="/" element={<JourneyList />}/>
             <Route path="/stations" element={<StationList />}/>
+            <Route path="/stations/:id" element={<StationView />}/>
           </Routes>
         </Container>
       </Router>

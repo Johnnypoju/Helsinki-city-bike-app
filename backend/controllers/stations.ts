@@ -37,15 +37,18 @@ router.get('/', async (req,res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     console.log(req.params.id);
-    const station = await Station.findByPk(req.params.id);
+    const station = await Station.findByPk(req.params.id, {
+        attributes: [ "id", "station_name_fi", "address_fi"]
+    });
     const stationId = station?.dataValues.id;
+    console.log(stationId);
     if (station) {
-        const departureStations = await Station.count({
+        const departureStations = await Route.count({
             where: {
                 departureStationId: stationId
             }
         })
-        const returStations = await Station.count({
+        const returStations = await Route.count({
             where: {
                 returnStationId: stationId
             }

@@ -1,5 +1,5 @@
 export interface Journey {
-    id: string,
+    id: number,
     departure_station_name: string,
     return_station_name: string, 
     distance: number,
@@ -7,9 +7,9 @@ export interface Journey {
 }
 
 export interface Station {
-    id: string,
+    id: number,
     station_name_fi: string,
-    station_address_fi: string,
+    address_fi: string,
     departures: number,
     returns: number
 }
