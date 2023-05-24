@@ -36,7 +36,7 @@ export async function up() {
                         fs.createReadStream("./2021-07.csv")
                             .pipe(parse({ delimiter: ",", from_line: 2}))
                             .on("data", function (row) {
-                                if (row[7] < 10 || row[6] < 10) {
+                                if (row[7] < 10 || row[6] < 10 || !Date.parse(row[0]) || !Date.parse(row[1])) {
                                     
                                 } else {
                                     data.push({

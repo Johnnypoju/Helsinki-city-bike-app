@@ -3,9 +3,8 @@ import React from "react";
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
 
 import {  useStateValue } from "../../state";
-import { Station } from "../../types";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { stationFetch } from "../../util/stationFetcher";
 
 

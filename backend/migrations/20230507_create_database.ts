@@ -96,4 +96,4 @@ async function down({ context: queryInterface }  : (any)) {
     await queryInterface.dropTable('stations');
 }
 
-module.exports = { up, down};
+module.exports = { up, down };

@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "type": "commonjs",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "verbose": true
+  },
   "scripts": {
     "start": "NODE_ENV=production ts-node ./build/index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.ts",
-    "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
-    "db:reset": "npx sequelize-cli-typescript db:drop && npx sequelize-cli db:create && npx sequelize-cli-typescript db:migrate && npx sequelize-cli-typescript db:seed:all",
-    "pretest": "cross-env NODE_ENV=test npm run db:reset",
-    "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli-typescript db:create",
+    "test": "cross-env jest --detectOpenHandles",
     "build": "tsc",
     "migration:down": "ts-node ./util/rollback.ts"
   },
