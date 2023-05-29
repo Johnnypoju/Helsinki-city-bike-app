@@ -1,7 +1,40 @@
-# Getting Started with Create React App
+# Description of the project
+This is a simple full-stack server setup to enable fetching and showing of Helsinki City bike routes and stations, from a local postgres database.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project has only been tested using Ubuntu.
 
+## Setting project up
+
+Clone project using git clone and then navigate to Helsinki-city-bike-app/frontend and perform "npm install" to fetch package used for running the application.
+
+create a .env file in path Helsinki-city-bike-app/backend with content for postgres path, with the following template.
+
+```
+DATABASE_URL= 'postgres://postgres:devving@localhost:5432/helsinkicitybike'
+PORT= '3001'
+```
+
+Copy data files to Helsinki-city-bike-app/backend/migrations, to have files ready for data migration.
+
+- https://dev.hsl.fi/citybikes/od-trips-2021/2021-05.csv
+- https://dev.hsl.fi/citybikes/od-trips-2021/2021-06.csv
+- https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv
+- https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv
+
+
+## Setting up the database
+
+Unfortunately this project at the moment supports only postgresql.
+
+Setup psql on your system.
+https://www.cherryservers.com/blog/how-to-install-and-setup-postgresql-server-on-ubuntu-20-04
+
+Connect to postgres service and create a database for use with the project and copy proper url into .env.
+for example 
+
+`
+DATABASE_URL= 'postgres://<user>:<password>@localhost:5432/helsinkicitybike'
+`
 ## Available Scripts
 
 In the project directory, you can run:
@@ -11,8 +44,7 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Also builds the backend node server to run on port 3001
 
 ### `npm test`
 
@@ -26,21 +58,3 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
