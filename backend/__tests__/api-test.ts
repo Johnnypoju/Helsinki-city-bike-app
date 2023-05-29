@@ -39,7 +39,7 @@ beforeAll(async () => {
             .expect('Content-Type', /json/);
             
 
-        console.log(result);
+        console.log(result.body);
         expect(result.body.station_name_fi);
         expect(result.body.address_fi);
         expect(result.body.departureStations);

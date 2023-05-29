@@ -1,3 +1,4 @@
+import React from 'react';
 import axios from 'axios';
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
 
@@ -11,6 +12,26 @@ import { apiBaseUrl } from "../../constants";
 const JourneyList = ( ) => {
     const [ { journeys, page, limit }, dispatch ] = useStateValue();
 
+    React.useEffect(() => {
+    
+        const fetchJourneyList = async () => {
+          try {
+            const { data: journeyListFromApi } = await axios.get<JourneyArray>(
+              `${apiBaseUrl}/routes?page=${page}&limit=${limit}`
+            )
+            
+            dispatch(setJourneyList(journeyListFromApi));
+            
+          } catch (error) {
+            console.error(error);
+          }
+          };
+      
+        void fetchJourneyList();
+        
+      }, [dispatch, page, limit]);
+
+
     const paginate = async ({selected} : {selected: number}) => {
         dispatch(setPage(selected+1));
         const { data: journeyListFromApi } = await axios.get<JourneyArray>(
@@ -18,8 +39,14 @@ const JourneyList = ( ) => {
           )
         dispatch(setJourneyList(journeyListFromApi));
     };
-
-    console.log(journeys);
+    if (Object.keys(journeys.routes).length < 1) {
+        return (
+            <div>..loading</div>
+        );
+        
+    }
+    else {
+        console.log(journeys);
     return (
         <div>
             <Box>
@@ -62,6 +89,8 @@ const JourneyList = ( ) => {
                 />
         </div>
     )
+    }
+    
 };
 
 export default JourneyList;

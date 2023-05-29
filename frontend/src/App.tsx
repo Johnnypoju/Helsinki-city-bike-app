@@ -1,60 +1,28 @@
 import React from 'react';
-import axios from 'axios';
+
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { Button, Divider, Container } from "@material-ui/core";
-import {  JourneyArray,  StationArray } from "./types";
+
 import JourneyList from './modules/JourneyList';
 import StationList from './modules/StationList';
 import StationView from './modules/StationView';
-import { setJourneyList,  setStationList,  useStateValue } from "./state";
-import { apiBaseUrl } from './constants';
+
 import './index.css';
+import { setPage, useStateValue } from './state';
 
 const App = ()  => {
 
-  const [{page, limit}, dispatch ] = useStateValue();
-  
-
-  React.useEffect(() => {
-    
-    const fetchJourneyList = async () => {
-      try {
-        const { data: journeyListFromApi } = await axios.get<JourneyArray>(
-          `${apiBaseUrl}/routes?page=${page}&limit=${limit}`
-        )
-        
-        dispatch(setJourneyList(journeyListFromApi));
-        
-      } catch (error) {
-        console.error(error);
-      }
-      };
-  
-    const fetchStationList = async () => {
-      try {
-        const { data: stationListFromApi } = await axios.get<StationArray>(
-          `${apiBaseUrl}/stations?page=${page}&limit=${limit}`
-        )
-        dispatch(setStationList(stationListFromApi));
-        
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    void fetchJourneyList();
-    void fetchStationList();
-    
-  }, [dispatch, page, limit]);
-
-  
+  const [,dispatch] = useStateValue();
+  const resetPage = async () => {
+    await dispatch(setPage(1));
+  }
 
   return (
     <div className='App'>
       <Router>
         <Container>
-          <Button component={Link} to="/" >Journeys</Button>
-          <Button component={Link} to="/stations" >Stations</Button>
+          <Button component={Link} onClick={resetPage} to="/" >Journeys</Button>
+          <Button component={Link} onClick={resetPage} to="/stations" >Stations</Button>
           <Divider hidden/>
           <Routes>
             <Route path="/" element={<JourneyList />}/>
