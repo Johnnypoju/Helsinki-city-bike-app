@@ -60,3 +60,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!****
+
+## TODO
+
+- add search operation for station and journey lists
+- add more tests for frontend and axios mocking
+- enable usage of different database types with sequelize using .env variables
+- add map view for singel station view
